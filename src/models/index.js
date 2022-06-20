@@ -1,16 +1,4 @@
-// import Products from './product.model';
-// import ProductsCategory from './productCategory.model';
 
-// ProductsCategory.hasMany(Products, {
-//     foreignKey: "categoryId",
-//     as: "productDetails"
-// });
-// Products.belongsTo(ProductsCategory, {
-//     foreignKey: "categoryId",
-//     as: 'categoryDetails'
-// });
-// export {default as productModel} from './product.model';
-// export {default as productCategoryModel} from './productCategory.model';
 'use strict';
 require('dotenv').config({ path: 'src/config/.env' });
 import dbConnection from '../config/dbConnection';
@@ -39,7 +27,9 @@ Object.keys(db).forEach((modelName) => {
 		db[modelName].associate(db);
 	}
 });
-sequelize.sync();
+dbConnection.then(()=>{
+    sequelize.sync();
+});
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
